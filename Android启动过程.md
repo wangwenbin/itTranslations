@@ -1,5 +1,6 @@
-In Depth : Android Boot Sequence / Process
+#In Depth : Android Boot Sequence / Process
 >深度解析：Android启动序列与进程
+
 ================================================================
 What happened when I press power on button in my Android device ?
 >当我按下我的Android设备的电源键时发生了什么？
