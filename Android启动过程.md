@@ -1,25 +1,33 @@
 In Depth : Android Boot Sequence / Process
->>深度解析：Android启动序列与进程
-
-
+>深度解析：Android启动序列与进程
+================================================================
 What happened when I press power on button in my Android device ?
->>当我按下我的Android设备的电源键时发生了什么？
+>当我按下我的Android设备的电源键时发生了什么？
+
 What is Android boot sequence ?
->>什么事Android启动序列？
+>什么事Android启动序列？
+
 What is linux kernel ?
->>什么是linux内核？
+>什么是linux内核？
+
 What is different between desktop linux kernel and Android linux kernel ?
->>Android的linux内核与桌面linux的内核有什么不同？
+>Android的linux内核与桌面linux的内核有什么不同？
+
 What is bootloader ?
->>什么bootloader（启动引导）？
+>什么bootloader（启动引导）？
+
 What is Zygote ?
->>什么是Zygote？
+>什么是Zygote？
+
 What is x86 and ARM linux ?
->>x86和ARM分别是什么？
+>x86和ARM分别是什么？
+
 What is init.rc ?
->>什么是init.rc？
+>什么是init.rc？
+
 What is System Server ?
->>什么是系统服务器？
+>什么是系统服务器？
+
 
  Many questions pop-up in mind when we think about Android boot sequence.
 
