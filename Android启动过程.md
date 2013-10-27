@@ -73,7 +73,7 @@ Android bootloader can be found at
 >1. init.s --初始化栈，用0初始化BSS段，启动main.c中的_main()。
 
 2. main.c - Initializes hardware (clocks, board, keypad, console), creates Linux tags
->main.c --初始化硬件（时钟，主板，键盘，控制台），创建Linux标签。
+>2. main.c --初始化硬件（时钟，主板，键盘，控制台），创建Linux标签。
 
 Refer this link to know more about Android bootloader :
 >参考这个链接来学习更多关于Android bootloader的知识：
