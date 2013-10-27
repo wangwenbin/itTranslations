@@ -51,6 +51,7 @@ Android Boot Sequence / Process
 
 Step 1 : Power On and System Startup 
 >第一步：机器上电，系统启动。
+
 When power start Boot ROM code start execution from pre defined location which is hardwired on ROM. It load Bootloader into RAM and start execution
 >当上电时开始Boot ROM代码，开始从硬刻录在ROM上的定义的地址执行。它加载Bootloader到RAM兵器开始执行。
 
