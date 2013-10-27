@@ -122,7 +122,7 @@ on <trigger>
    `
 
 Service :  Services are programs which init launches and (optionally) restarts when they exit. 
->服务：服务是一个init加载的可选存在则重启的软件。` Syntax`
+>服务：服务是一个init加载的可选存在则重启的软件。`Syntax`
 `service <name> <pathname> [ <argument> ]*`
    `<option>`
    `<option>`
