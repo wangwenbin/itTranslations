@@ -41,7 +41,7 @@ Here I am explaining Android boot process. I hope you will find answer of above 
 
 
 Android is linux based open source operating system, x86 (x86 is a series of computer microprocessor instruction set architectures based on the Intel 8086 CPU.) is most likely system where linux kernel is deployed however all Android devices are running on ARM process (ARM (formerly Advanced RISC Machine, which was formerly Acorn RISC Machine)) except Intel’s Xolo device (http://xolo.in/xolo-x900-features). Xolo comes with Atom 1.6 GHz x86 processor. Android boot sequence or I can say embedded device or ARM based linux has minor difference compare to desktop version.  In this article I am going to explain boot sequence for Android only. Inside the linux boot process is good article for desktop based linux boot sequence.
->Android是一个基于linux的开源的操作系统，x86（x86是一系列的基于Intel 8086 CPU的计算机微处理器指令）最受linux内核欢迎的部署环境，然后几乎所有的（译注：原文意思为所有的）Android设备都运行在ARM(ARM(以前叫Advanced RISC Machine，更早以前叫Acorn RISC Machine))处理器上，除了Intel的Xolo（http://xolo.in/xolo-x900-features）设备，Xolo带有1.6GHz的x86处理器。Android启动顺序或者我称之为嵌入式设备或者基于linux的ARM设备的启动顺序和桌面版本linux相比有一点不同。在这片文章中，我将只解释Android的启动顺序。其中linux启动过程对基于linux启动顺序的桌面系统是好的文章。
+>Android是一个基于linux的开源的操作系统，x86（x86是一系列的基于Intel 8086 CPU的计算机微处理器指令）最受linux内核欢迎的部署环境，然后几乎所有的（译注：原文意思为所有的）Android设备都运行在ARM(ARM(以前叫Advanced RISC Machine，更早以前叫Acorn RISC Machine))处理器上，除了Intel的Xolo（ http://xolo.in/xolo-x900-features ）设备，Xolo带有1.6GHz的x86处理器。Android启动顺序或者我称之为嵌入式设备或者基于linux的ARM设备的启动顺序和桌面版本linux相比有一点不同。在这片文章中，我将只解释Android的启动顺序。其中linux启动过程对基于linux启动顺序的桌面系统是好的文章。
 
 Android device execute following steps when you press power switch
 >当按下电源开关的时候Android设备执行以下步骤
