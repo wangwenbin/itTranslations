@@ -114,6 +114,7 @@ Action : Actions are named sequences of commands.  Actions have a trigger which 
 >动作：动作是一个命名了的命令序列。动作有一个触发器用来决定什么时候这个动作应该发生。
 
 >写法：
+
     Syntax 
     on <trigger>
        <command>
@@ -121,7 +122,7 @@ Action : Actions are named sequences of commands.  Actions have a trigger which 
        <command>
 
 Service :  Services are programs which init launches and (optionally) restarts when they exit. 
->服务：服务是一个init加载的可选存在则重启的软件。>写法：    Syntax
+>服务：服务是一个init加载的可选存在则重启的软件。>写法：    Syntax
         service <name> <pathname> [ <argument> ]*
         <option>
         <option>
