@@ -1,80 +1,86 @@
-#In Depth : Android Boot Sequence / Process
->#Éî¶È½âÎö£ºAndroidÆô¶¯Ë³ĞòÓë½ø³Ì
+ï»¿#In Depth : Android Boot Sequence / Process
+>#æ·±åº¦è§£æï¼šAndroidå¯åŠ¨é¡ºåºä¸è¿›ç¨‹
 
 ------------------------------------------
 
 
 What happened when I press power on button in my Android device ?
->µ±ÎÒ°´ÏÂÎÒµÄAndroidÉè±¸µÄµçÔ´¼üÊ±·¢ÉúÁËÊ²Ã´£¿
+>å½“æˆ‘æŒ‰ä¸‹æˆ‘çš„Androidè®¾å¤‡çš„ç”µæºé”®æ—¶å‘ç”Ÿäº†ä»€ä¹ˆï¼Ÿ
 
 What is Android boot sequence ?
->Ê²Ã´ÊÂAndroidÆô¶¯ĞòÁĞ£¿
+>ä»€ä¹ˆäº‹Androidå¯åŠ¨åºåˆ—ï¼Ÿ
 
 What is linux kernel ?
->Ê²Ã´ÊÇlinuxÄÚºË£¿
+>ä»€ä¹ˆæ˜¯linuxå†…æ ¸ï¼Ÿ
 
 What is different between desktop linux kernel and Android linux kernel ?
->AndroidµÄlinuxÄÚºËÓë×ÀÃælinuxµÄÄÚºËÓĞÊ²Ã´²»Í¬£¿
+>Androidçš„linuxå†…æ ¸ä¸æ¡Œé¢linuxçš„å†…æ ¸æœ‰ä»€ä¹ˆä¸åŒï¼Ÿ
 
 What is bootloader ?
->Ê²Ã´bootloader£¨Æô¶¯Òıµ¼£©£¿
+>ä»€ä¹ˆbootloaderï¼ˆå¯åŠ¨å¼•å¯¼ï¼‰ï¼Ÿ
 
 What is Zygote ?
->Ê²Ã´ÊÇZygote£¿
+>ä»€ä¹ˆæ˜¯Zygoteï¼Ÿ
 
 What is x86 and ARM linux ?
->x86ºÍARM·Ö±ğÊÇÊ²Ã´£¿
+>x86å’ŒARMåˆ†åˆ«æ˜¯ä»€ä¹ˆï¼Ÿ
 
 What is init.rc ?
->Ê²Ã´ÊÇinit.rc£¿
+>ä»€ä¹ˆæ˜¯init.rcï¼Ÿ
 
 What is System Server ?
->Ê²Ã´ÊÇÏµÍ³·şÎñÆ÷£¿
+>ä»€ä¹ˆæ˜¯ç³»ç»ŸæœåŠ¡å™¨ï¼Ÿ
 
 
  Many questions pop-up in mind when we think about Android boot sequence.
->µ±ÎÒÃÇË¼¿¼androidÆô¶¯Ë³ĞòµÄÊ±ºò£¬ºÜ¶àÎÊÌâ¶¼»áÔÚÎÒÃÇµÄÄÔº£¸¡ÏÖ¡£
+>å½“æˆ‘ä»¬æ€è€ƒandroidå¯åŠ¨é¡ºåºçš„æ—¶å€™ï¼Œå¾ˆå¤šé—®é¢˜éƒ½ä¼šåœ¨æˆ‘ä»¬çš„è„‘æµ·æµ®ç°ã€‚
 
 Here I am explaining Android boot process. I hope you will find answer of above questions.
->ÔÚÕâÀïÎÒ½âÊÍÒ»ÏÂandroidµÄÆô¶¯¹ı³Ì¡£ÎÒÏ£ÍûÄãÄÜ´ÓÖĞÕÒµ½ÉÏÃæÎÊÌâµÄ´ğ°¸¡£
+>åœ¨è¿™é‡Œæˆ‘è§£é‡Šä¸€ä¸‹androidçš„å¯åŠ¨è¿‡ç¨‹ã€‚æˆ‘å¸Œæœ›ä½ èƒ½ä»ä¸­æ‰¾åˆ°ä¸Šé¢é—®é¢˜çš„ç­”æ¡ˆã€‚
 
 
 
-Android is linux based open source operating system, x86 (x86 is a series of computer microprocessor instruction set architectures based on the Intel 8086 CPU.) is most likely system where linux kernel is deployed however all Android devices are running on ARM process (ARM (formerly Advanced RISC Machine, which was formerly Acorn RISC Machine)) except Intel¡¯s Xolo device (http://xolo.in/xolo-x900-features). Xolo comes with Atom 1.6 GHz x86 processor. Android boot sequence or I can say embedded device or ARM based linux has minor difference compare to desktop version.  In this article I am going to explain boot sequence for Android only. Inside the linux boot process is good article for desktop based linux boot sequence.
->AndroidÊÇÒ»¸ö»ùÓÚlinuxµÄ¿ªÔ´µÄ²Ù×÷ÏµÍ³£¬x86£¨x86ÊÇÒ»ÏµÁĞµÄ»ùÓÚIntel 8086 CPUµÄ¼ÆËã»úÎ¢´¦ÀíÆ÷Ö¸Áî£©×îÊÜlinuxÄÚºË»¶Ó­µÄ²¿Êğ»·¾³£¬È»ºó¼¸ºõËùÓĞµÄ£¨Òë×¢£ºÔ­ÎÄÒâË¼ÎªËùÓĞµÄ£©AndroidÉè±¸¶¼ÔËĞĞÔÚARM(ARM(ÒÔÇ°½ĞAdvanced RISC Machine£¬¸üÔçÒÔÇ°½ĞAcorn RISC Machine))´¦ÀíÆ÷ÉÏ£¬³ıÁËIntelµÄXolo£¨http://xolo.in/xolo-x900-features£©Éè±¸£¬Xolo´øÓĞ1.6GHzµÄx86´¦ÀíÆ÷¡£AndroidÆô¶¯Ë³Ğò»òÕßÎÒ³ÆÖ®ÎªÇ¶ÈëÊ½Éè±¸»òÕß»ùÓÚlinuxµÄARMÉè±¸µÄÆô¶¯Ë³ĞòºÍ×ÀÃæ°æ±¾linuxÏà±ÈÓĞÒ»µã²»Í¬¡£ÔÚÕâÆ¬ÎÄÕÂÖĞ£¬ÎÒ½«Ö»½âÊÍAndroidµÄÆô¶¯Ë³Ğò¡£ÆäÖĞlinuxÆô¶¯¹ı³Ì¶Ô»ùÓÚlinuxÆô¶¯Ë³ĞòµÄ×ÀÃæÏµÍ³ÊÇºÃµÄÎÄÕÂ¡£
+Android is linux based open source operating system, x86 (x86 is a series of computer microprocessor instruction set architectures based on the Intel 8086 CPU.) is most likely system where linux kernel is deployed however all Android devices are running on ARM process (ARM (formerly Advanced RISC Machine, which was formerly Acorn RISC Machine)) except Intelâ€™s Xolo device (http://xolo.in/xolo-x900-features). Xolo comes with Atom 1.6 GHz x86 processor. Android boot sequence or I can say embedded device or ARM based linux has minor difference compare to desktop version.  In this article I am going to explain boot sequence for Android only. Inside the linux boot process is good article for desktop based linux boot sequence.
+>Androidæ˜¯ä¸€ä¸ªåŸºäºlinuxçš„å¼€æºçš„æ“ä½œç³»ç»Ÿï¼Œx86ï¼ˆx86æ˜¯ä¸€ç³»åˆ—çš„åŸºäºIntel 8086 CPUçš„è®¡ç®—æœºå¾®å¤„ç†å™¨æŒ‡ä»¤ï¼‰æœ€å—linuxå†…æ ¸æ¬¢è¿çš„éƒ¨ç½²ç¯å¢ƒï¼Œç„¶åå‡ ä¹æ‰€æœ‰çš„ï¼ˆè¯‘æ³¨ï¼šåŸæ–‡æ„æ€ä¸ºæ‰€æœ‰çš„ï¼‰Androidè®¾å¤‡éƒ½è¿è¡Œåœ¨ARM(ARM(ä»¥å‰å«Advanced RISC Machineï¼Œæ›´æ—©ä»¥å‰å«Acorn RISC Machine))å¤„ç†å™¨ä¸Šï¼Œé™¤äº†Intelçš„Xoloï¼ˆhttp://xolo.in/xolo-x900-featuresï¼‰è®¾å¤‡ï¼ŒXoloå¸¦æœ‰1.6GHzçš„x86å¤„ç†å™¨ã€‚Androidå¯åŠ¨é¡ºåºæˆ–è€…æˆ‘ç§°ä¹‹ä¸ºåµŒå…¥å¼è®¾å¤‡æˆ–è€…åŸºäºlinuxçš„ARMè®¾å¤‡çš„å¯åŠ¨é¡ºåºå’Œæ¡Œé¢ç‰ˆæœ¬linuxç›¸æ¯”æœ‰ä¸€ç‚¹ä¸åŒã€‚åœ¨è¿™ç‰‡æ–‡ç« ä¸­ï¼Œæˆ‘å°†åªè§£é‡ŠAndroidçš„å¯åŠ¨é¡ºåºã€‚å…¶ä¸­linuxå¯åŠ¨è¿‡ç¨‹å¯¹åŸºäºlinuxå¯åŠ¨é¡ºåºçš„æ¡Œé¢ç³»ç»Ÿæ˜¯å¥½çš„æ–‡ç« ã€‚
 
 Android device execute following steps when you press power switch
->µ±°´ÏÂµçÔ´¿ª¹ØµÄÊ±ºòAndroidÉè±¸Ö´ĞĞÒÔÏÂ²½Öè
+>å½“æŒ‰ä¸‹ç”µæºå¼€å…³çš„æ—¶å€™Androidè®¾å¤‡æ‰§è¡Œä»¥ä¸‹æ­¥éª¤
 
 Android Boot Sequence / Process
->AndroidÆô¶¯Ë³ĞòºÍ¹ı³Ì
+>Androidå¯åŠ¨é¡ºåºå’Œè¿‡ç¨‹
 
 Step 1 : Power On and System Startup 
->µÚÒ»²½£º»úÆ÷ÉÏµç£¬ÏµÍ³Æô¶¯¡£
+>ç¬¬ä¸€æ­¥ï¼šæœºå™¨ä¸Šç”µï¼Œç³»ç»Ÿå¯åŠ¨ã€‚
 When power start Boot ROM code start execution from pre defined location which is hardwired on ROM. It load Bootloader into RAM and start execution
->µ±ÉÏµçÊ±¿ªÊ¼Boot ROM´úÂë£¬¿ªÊ¼´ÓÓ²¿ÌÂ¼ÔÚROMÉÏµÄ¶¨ÒåµÄµØÖ·Ö´ĞĞ¡£Ëü¼ÓÔØBootloaderµ½RAM±øÆ÷¿ªÊ¼Ö´ĞĞ¡£
+>å½“ä¸Šç”µæ—¶å¼€å§‹Boot ROMä»£ç ï¼Œå¼€å§‹ä»ç¡¬åˆ»å½•åœ¨ROMä¸Šçš„å®šä¹‰çš„åœ°å€æ‰§è¡Œã€‚å®ƒåŠ è½½Bootloaderåˆ°RAMå…µå™¨å¼€å§‹æ‰§è¡Œã€‚
 
 Step 2 : Bootloader
->µÚ¶ş²¿£ºBootloader
+>ç¬¬äºŒéƒ¨ï¼šBootloader
 
-Bootloader is small program which runs before Android operating system running. Bootloader is first program to run so It is specific for board and processor. Device manufacturer either use popular bootloaders like redboot,uboot, qi bootloader or they develop own bootloaders, It¡¯s not part of Android Operating System. bootloader is the place where OEMs and Carriers put there locks and restrictions. 
->Bootloader ÊÇÒ»¸öÔÚAndroid²Ù×÷ÏµÍ³Ç°ÔËĞĞµÄĞ¡³ÌĞò¡£BootloaderÊÇµÚÒ»¸öÒªÔËĞĞµÄ³ÌĞò£¬ËùÒÔËüÊÇ¶ÔÖ÷°åºÍ´¦ÀíÆ÷Çø·ÖµÄ¡£Éè±¸ÖÆÔìÉÌ»òÕß²ÉÓÃÏñredboot£¬uboot£¬qi bootloaderµÈÁ÷ĞĞµÄbootloader»òÕßËûÃÇ×Ô¼º¿ª·¢×Ô¼ºµÄbootloader£¬Ëü²¢²»ÊÇAndroid²Ù×÷ÏµÍ³µÄÒ»²¿·Ö¡£bootloaderÊÇOEMÃÇºÍÔËÓªÉÌ·ÅÖÃËûÃÇ¼ÏËøºÍÏŞÖÆµÄµØ·½¡£
+Bootloader is small program which runs before Android operating system running. Bootloader is first program to run so It is specific for board and processor. Device manufacturer either use popular bootloaders like redboot,uboot, qi bootloader or they develop own bootloaders, Itâ€™s not part of Android Operating System. bootloader is the place where OEMs and Carriers put there locks and restrictions. 
+>Bootloader æ˜¯ä¸€ä¸ªåœ¨Androidæ“ä½œç³»ç»Ÿå‰è¿è¡Œçš„å°ç¨‹åºã€‚Bootloaderæ˜¯ç¬¬ä¸€ä¸ªè¦è¿è¡Œçš„ç¨‹åºï¼Œæ‰€ä»¥å®ƒæ˜¯å¯¹ä¸»æ¿å’Œå¤„ç†å™¨åŒºåˆ†çš„ã€‚è®¾å¤‡åˆ¶é€ å•†æˆ–è€…é‡‡ç”¨åƒredbootï¼Œubootï¼Œqi bootloaderç­‰æµè¡Œçš„bootloaderæˆ–è€…ä»–ä»¬è‡ªå·±å¼€å‘è‡ªå·±çš„bootloaderï¼Œå®ƒå¹¶ä¸æ˜¯Androidæ“ä½œç³»ç»Ÿçš„ä¸€éƒ¨åˆ†ã€‚bootloaderæ˜¯OEMä»¬å’Œè¿è¥å•†æ”¾ç½®ä»–ä»¬æ·é”å’Œé™åˆ¶çš„åœ°æ–¹ã€‚
 
 Bootloader perform execution in two stages, first stage It to detect external RAM and load program which helps in second stage, In second stage bootloader setup network, memory, etc. which requires to run kernel, bootloader is able to provide configuration parameters or inputs to the kernel for specific purpose.  
-BootloaderµÄÖ´ĞĞ·ÖÎªÁ½¸ö½×¶Î¡£µÚÒ»½×¶Î£¬Ëü¼ì²âÀ©Õ¹RAMºÍ¼ÓÔØ³ÌĞò£¬ËûÃÇ¶ÔµÚ¶ş½×¶ÎÓĞ°ïÖú¡£ÔÚµÚ¶ş½×¶Î
+>Bootloaderçš„æ‰§è¡Œåˆ†ä¸ºä¸¤ä¸ªé˜¶æ®µã€‚ç¬¬ä¸€é˜¶æ®µï¼Œå®ƒæ£€æµ‹æ‰©å±•RAMå’ŒåŠ è½½ç¨‹åºï¼Œä»–ä»¬å¯¹ç¬¬äºŒé˜¶æ®µæœ‰å¸®åŠ©ã€‚åœ¨ç¬¬äºŒé˜¶æ®µBootloaderè®¾ç½®ç½‘ç»œã€å†…å­˜ã€ç­‰ç­‰ã€‚è¿™äº›éƒ½éœ€è¦å¯åŠ¨å†…æ ¸ã€‚bootloaderèƒ½å¤Ÿä¸ºç‰¹æ®Šçš„ç›®çš„æä¾›è®¾ç½®å‚æ•°æˆ–è€…å†…æ ¸è¾“å…¥ã€‚
+
 Android bootloader can be found at 
+>Androidçš„bootloaderå¯ä»¥åœ¨å¦‚ä¸‹åœ°æ–¹æ‰¾åˆ°
 
 <Android Source>\bootable\bootloader\legacy\usbloaderlegacy loader contain two important files that need to address here.
+<Androidæºä»£ç >\bootable\bootloader\legacy\usbloaderlegac åŠ è½½ç¨‹åºåŒ…æ‹¬ä¸¤ä¸ªéœ€è¦æ”¾åœ¨è¿™é‡Œçš„é‡è¦çš„æ–‡ä»¶ã€‚
 
 1. init.s - Initializes stacks, zeros the BSS segments, call _main() in main.c
+>1. init.s --åˆå§‹åŒ–æ ˆï¼Œç”¨0åˆå§‹åŒ–BSSæ®µï¼Œå¯åŠ¨main.cä¸­çš„_main()ã€‚
+
 2. main.c - Initializes hardware (clocks, board, keypad, console), creates Linux tags
+>main.c --åˆå§‹åŒ–ç¡¬ä»¶ï¼ˆæ—¶é’Ÿï¼Œä¸»æ¿ï¼Œé”®ç›˜ï¼Œæ§åˆ¶å°ï¼‰ï¼Œåˆ›å»ºLinuxæ ‡ç­¾ã€‚
 
 Refer this link to know more about Android bootloader :
 https://motorola-global-portal.custhelp.com/app/answers/detail/a_id/86208/~/bootloader-frequently-asked-questions
-
+é˜…è¯»
 Step 3: Kernel
 
-Android kernel start similar way as desktop linux kernel starts, as kernel launch it start setup cache, protected memory, scheduling, loads drivers. When kernel finish system setup first thing it look for ¡°init¡± in system files and launch root process or first process of system.  
+Android kernel start similar way as desktop linux kernel starts, as kernel launch it start setup cache, protected memory, scheduling, loads drivers. When kernel finish system setup first thing it look for â€œinitâ€ in system files and launch root process or first process of system.  
 
 Step 4: init process
 
@@ -86,7 +92,7 @@ init.rc file can be found in source tree at <android source>/system/core/rootdir
 readme.txt file can be found in source tree at <andorid source>/system/core/init/readme.txt
 
 
-Android has specific format and rules for init.rc files. In Android we call it as ¡°Android Init Language¡± 
+Android has specific format and rules for init.rc files. In Android we call it as â€œAndroid Init Languageâ€ 
 
 The Android Init Language consists of four broad classes of statements,which are Actions, Commands, Services, and Options.
 
@@ -107,7 +113,7 @@ service <name> <pathname> [ <argument> ]*
 
 Options : Options are modifiers to services.  They affect how and when init runs the service.
 
-Let¡¯s take a look of default init.rc file. Here I have listed only major events and services.
+Letâ€™s take a look of default init.rc file. Here I have listed only major events and services.
 
 
 Action / Service	Description
@@ -123,18 +129,18 @@ on boot	basic network init ,Memory Management ,etc
 service servicemanager	start system manager to manage all native services like location, audio, shared preference etc..
 service zygote	start zygote as app_process
 
-At this stage you can see ¡°Android¡± logo on device screen.
+At this stage you can see â€œAndroidâ€ logo on device screen.
 
 Step 5: Zygote and Dalvik
 
-In a Java, We know that separate Virtual Machine(VMs) instance will popup in memory for separate per app, In case of Android app should launch as quick as possible, If Android os launch different instance of Dalvik VM for every app then it consume lots of memory and time. so, to overcome this problem Android OS as system named ¡°Zygote¡±. Zygote enable shared code across Dalvik VM, lower memory footprint and minimal startup time. Zygote is a VM process that starts at system boot time as we know in previous step. Zygote preloads and initialize core library classes.  Normally there core classes are read-only and part of Android SDK or Core frameworks. In Java VM each instance has it¡¯s own copy of core library class files and heap objects. 
+In a Java, We know that separate Virtual Machine(VMs) instance will popup in memory for separate per app, In case of Android app should launch as quick as possible, If Android os launch different instance of Dalvik VM for every app then it consume lots of memory and time. so, to overcome this problem Android OS as system named â€œZygoteâ€. Zygote enable shared code across Dalvik VM, lower memory footprint and minimal startup time. Zygote is a VM process that starts at system boot time as we know in previous step. Zygote preloads and initialize core library classes.  Normally there core classes are read-only and part of Android SDK or Core frameworks. In Java VM each instance has itâ€™s own copy of core library class files and heap objects. 
 
 Zygote loading process
 
 1. Load ZygoteInit class, 
 Source Code :<Android Source> /frameworks/base/core/java/com/android/internal/os/ZygoteInit.java
 2. registerZygoteSocket() -  Registers a server socket for zygote command connections
-3. preloadClasses() - ¡°preloaded-classes¡± is simple text file contains list of classes that need to be preloaded, you cna find ¡°preloaded-classes¡± file at <Android Source>/frameworks/base
+3. preloadClasses() - â€œpreloaded-classesâ€ is simple text file contains list of classes that need to be preloaded, you cna find â€œpreloaded-classesâ€ file at <Android Source>/frameworks/base
 4. preloadResources() - preloadReaources means native themes and layouts, everything that include android.R file will be load using this method.
 
 At this time you can see bootanimation
@@ -143,7 +149,7 @@ Step 6: System  Service or Services
 
 After complete above steps, runtime request Zygote to launch system servers. System Servers are written in native and java both, System servers we can consider as process, The same system server is available as System Services in Android SDK. System server contain all system services. 
 
-Zygote fork new process to launch system services. You can find source code in ZygoteInit class and ¡°startSystemServer¡± method.
+Zygote fork new process to launch system services. You can find source code in ZygoteInit class and â€œstartSystemServerâ€ method.
 
 Core Services:
 1.     Starting Power Manager
@@ -178,4 +184,4 @@ Other services
  
 Step 7 : Boot Completed
 
-Once System Services up and running in memory, Android has completed booting process, At this time ¡°ACTION_BOOT_COMPLETED¡± standard broadcast action will fire.
+Once System Services up and running in memory, Android has completed booting process, At this time â€œACTION_BOOT_COMPLETEDâ€ standard broadcast action will fire.
