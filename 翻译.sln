@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE7E8BB6-9691-428C-87C9-1C79BF257C2B}"
 	ProjectSection(SolutionItems) = preProject
 		Android启动过程.md = Android启动过程.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
