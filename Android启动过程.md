@@ -122,16 +122,11 @@ on <trigger>
    `
 
 Service :  Services are programs which init launches and (optionally) restarts when they exit. 
->服务：服务是一个init加载的可选存在则重启的软件。` Syntax
-
-service <name> <pathname> [ <argument> ]*
-
-   <option>
-
-   <option>
-
-   ...
-`
+>服务：服务是一个init加载的可选存在则重启的软件。` Syntax`
+`service <name> <pathname> [ <argument> ]*`
+   `<option>`
+   `<option>`
+   `...`
 
 Options : Options are modifiers to services.  They affect how and when init runs the service.
 >选项：选项是服务的修饰符。它们影响init怎样和在什么时候启动对应的服务。
