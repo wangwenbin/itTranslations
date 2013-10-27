@@ -55,7 +55,7 @@ When power start Boot ROM code start execution from pre defined location which i
 >当上电时开始Boot ROM代码，开始从硬刻录在ROM上的定义的地址执行。它加载Bootloader到RAM兵器开始执行。
 
 Step 2 : Bootloader
->第二部：Bootloader
+>第二步：Bootloader
 
 Bootloader is small program which runs before Android operating system running. Bootloader is first program to run so It is specific for board and processor. Device manufacturer either use popular bootloaders like redboot,uboot, qi bootloader or they develop own bootloaders, It’s not part of Android Operating System. bootloader is the place where OEMs and Carriers put there locks and restrictions. 
 >Bootloader 是一个在Android操作系统前运行的小程序。Bootloader是第一个要运行的程序，所以它是对主板和处理器区分的。设备制造商或者采用像redboot，uboot，qi bootloader等流行的bootloader或者他们自己开发自己的bootloader，它并不是Android操作系统的一部分。bootloader是OEM们和运营商放置他们枷锁和限制的地方。
@@ -67,7 +67,7 @@ Android bootloader can be found at
 >Android的bootloader可以在如下地方找到
 
 <Android Source>\bootable\bootloader\legacy\usbloaderlegacy loader contain two important files that need to address here.
-<Android源代码>\bootable\bootloader\legacy\usbloaderlegac 加载程序包括两个需要放在这里的重要的文件。
+><Android源代码>\bootable\bootloader\legacy\usbloaderlegac 加载程序包括两个需要放在这里的重要的文件。
 
 1. init.s - Initializes stacks, zeros the BSS segments, call _main() in main.c
 >1. init.s --初始化栈，用0初始化BSS段，启动main.c中的_main()。
@@ -76,45 +76,63 @@ Android bootloader can be found at
 >main.c --初始化硬件（时钟，主板，键盘，控制台），创建Linux标签。
 
 Refer this link to know more about Android bootloader :
+>参考这个链接来学习更多关于Android bootloader的知识：
+
 https://motorola-global-portal.custhelp.com/app/answers/detail/a_id/86208/~/bootloader-frequently-asked-questions
-阅读
+
+>[阅读](https://motorola-global-portal.custhelp.com/app/answers/detail/a_id/86208/~/bootloader-frequently-asked-questions)
+
 Step 3: Kernel
+>第三步：内核
 
 Android kernel start similar way as desktop linux kernel starts, as kernel launch it start setup cache, protected memory, scheduling, loads drivers. When kernel finish system setup first thing it look for “init” in system files and launch root process or first process of system.  
+>Android内核的启动和桌面Linux的内核启动相似，当内核被加载后它开始逐步设置缓存、保护内存、设置计划、加载驱动。当内核完成系统设置后，做的第一件事情就是查找系统文件中的init并且加载root进程或者系统的第一个进程。
 
 Step 4: init process
+>第四步：init进程（初始化进程）
 
 init it very first process, we can say it is root process or grandmother of all processes. init process has two responsibilities 1. mount directories like /sys, /dev, /proc and 2. run init.rc script.
-
+>init是最优先的进程，我们可以称之为root进程或者所有进程的祖进程（祖母进程）。init进程有两个责任：1.加载像/sys, /dev, /proc这样的目录。2.执行init.rc脚本。
 
  init process can be found at init : <android source>/system/core/init
-init.rc file can be found in source tree at <android source>/system/core/rootdir/init.rc
-readme.txt file can be found in source tree at <andorid source>/system/core/init/readme.txt
+ >init进程可以在如下目录找到：<Android源代码>/system/core/init
 
+init.rc file can be found in source tree at <android source>/system/core/rootdir/init.rc
+>init.rc文件可以在代码树种这一位置找到：<Android源代码>/system/core/rootdir/init.rc
+
+readme.txt file can be found in source tree at <andorid source>/system/core/init/readme.txt
+>readme.txt文件可以在代码树的这个位置找到：<Android源代码>/system/core/init/readme.txt
 
 Android has specific format and rules for init.rc files. In Android we call it as “Android Init Language” 
+>对于init.rc文件来说Android有特殊的格式和规则。在Android中我们称之为“Android初始化语言（Android Init Language）”。
 
 The Android Init Language consists of four broad classes of statements,which are Actions, Commands, Services, and Options.
+>Android初始化语言有四个类的语句，它们分别是动作（Actions），命令（Commands），服务（Services）和选项（Options）。
 
 Action : Actions are named sequences of commands.  Actions have a trigger which is used to determine when the action should occur.
+>动作：动作是一个命名了的命令序列。动作有一个触发器用来决定什么时候这个动作应该发生。
 
-Syntax 
+>写法：
+`Syntax 
 on <trigger>
    <command>
    <command>
    <command>
+   `
 
-Service :  Services are programs which init launches and (optionally) restarts when they exit.  Syntax
-
+Service :  Services are programs which init launches and (optionally) restarts when they exit. 
+>服务：服务是一个init加载的可选存在则重启的软件。` Syntax
 service <name> <pathname> [ <argument> ]*
    <option>
    <option>
    ...
+`
 
 Options : Options are modifiers to services.  They affect how and when init runs the service.
+>选项：选项是服务的修饰符。它们影响init怎样和在什么时候启动对应的服务。
 
 Let’s take a look of default init.rc file. Here I have listed only major events and services.
-
+>让我们看一下缺省的init.rc文件。这里我只列出主要的事件和服务。
 
 Action / Service	Description
 on early-init	Set init and its forked children's oom_adj.
