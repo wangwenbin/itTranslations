@@ -2,6 +2,7 @@
 >#深度解析：Android启动顺序与进程
 
 ------------------------------------------
+==========================================
 
 
 What happened when I press power on button in my Android device ?
@@ -122,7 +123,11 @@ Action : Actions are named sequences of commands.  Actions have a trigger which 
        <command>
 
 Service :  Services are programs which init launches and (optionally) restarts when they exit. 
->服务：服务是一个init加载的可选存在则重启的软件。>写法：    Syntax
+>服务：服务是一个init加载的可选存在则重启的软件。
+
+>写法：
+
+    Syntax
         service <name> <pathname> [ <argument> ]*
         <option>
         <option>
@@ -134,18 +139,18 @@ Options : Options are modifiers to services.  They affect how and when init runs
 Let’s take a look of default init.rc file. Here I have listed only major events and services.
 >让我们看一下缺省的init.rc文件。这里我只列出主要的事件和服务。
 
-Action / Service	Description
-on early-init	Set init and its forked children's oom_adj.
-Set the security context for the init process.
-on init	setup the global environment
-Create cgroup mount point for cpu accounting
-and many
-on fs	mount mtd partitions
-on post-fs	change permissions of system directories
-on post-fs-data	change permission of /data folders and sub folders
-on boot	basic network init ,Memory Management ,etc
-service servicemanager	start system manager to manage all native services like location, audio, shared preference etc..
-service zygote	start zygote as app_process
+|| Action / Service（>动作/服务） ||	Description||   描述  ||
+          
+||on early-init	|| Set init and its forked children's oom_adj.<br>Set the security context for the init process.||设置init和它分叉的子oom_adj。<br>设置init进程的安全上下文。||
+||on init	|| setup the global environment||设置全局环境，为CPU计算建立C组挂载点，其他||
+||Create cgroup mount point for cpu accounting
+||and many
+||on fs	mount mtd partitions
+||on post-fs	change permissions of system directories
+||on post-fs-data	change permission of /data folders and sub folders
+||on boot	basic network init ,Memory Management ,etc
+||service servicemanager	start system manager to manage all native services like location, audio, shared preference etc..
+||service zygote	start zygote as app_process
 
 At this stage you can see “Android” logo on device screen.
 
